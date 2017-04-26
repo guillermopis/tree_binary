@@ -4,7 +4,9 @@
 #include <stdlib.h>
 #include <windows.h>
 using namespace std;
-
+int contador=0;
+int cont=0;
+int bandera=0;
 class nodo {
 	//dESDE OTRA CLASE SE PUEDEN acceder a estos atributos
    public:
@@ -34,6 +36,7 @@ nodo *crearnodo(int,nodo *);
 
 nodo *arbol = NULL; //incializa el arbol en NULL
 nodo *arbol2 = NULL; //incializa el arbol en NULL
+nodo *raiz=NULL;//guarda un apuntador a la raiz del arbol;
 nodo *arbol3 = NULL;
 
 typedef nodo *pnodo;
@@ -44,6 +47,8 @@ class lista {
    	void mostrararbol(nodo *); //funcion para mostrar el arbol con recursividad
    	void mostrararbol2(nodo *); //FUNCIOIN PARA RECCORER EL arbol con while
    	void buscar(int , nodo *);
+   	int identificar(int,nodo *);
+   	int caracteristicas(int, nodo *);
    private:
     pnodo primero;
     pnodo actual;
@@ -65,10 +70,13 @@ void menu(){
 		system("cls");
 		cout<<"--------------ARBOLES---------------------"<<	endl;
 		cout<<"1. Insertar un nodo"<<endl;
-		cout<<"2. listar nodos usando while"<<endl;
-		cout<<"3. listar nodos usando recursividad"<<endl;
-		cout<<"4. buscar un nodo por su valor"<<endl;
-		cout<<"5. salir"<<endl<<endl;
+		//cout<<"2. listar nodos usando while"<<endl;
+		cout<<"2. listar nodos usando recursividad"<<endl;
+		cout<<"3. buscar un nodo por su valor"<<endl;
+		//cout<<"4. Eliminar nodo por su valor"<<endl;
+		cout<<"4. Identificar nodo"<<endl;
+		cout<<"5. Caracteristicas de un nodo"<<endl;
+		cout<<"6. salir"<<endl<<endl;
 		cout<<"ingrese una opcion: ";
 		cin>>opcion;
 			switch(opcion){
@@ -81,35 +89,158 @@ void menu(){
 						Lista.insertarnodo(arbol,val,NULL);
 						system("pause");
 						break;
-				case 3: 
+				case 2: 
 						system("cls");
 						cout<<"--------MOSTRANDO EL ARBOL RECURSIVO--------"<<endl;
 						lista Lista2;
 						Lista2.mostrararbol(arbol);
 						system("pause");
 						break;
-				case 2: 
+						
+				case 4:
 						system("cls");
-						cout<<"--------MOSTRANDO EL ARBOL usando while(NO DISPONIBLE)--------"<<endl;
-						//lista Lista6;
-						//Lista6.mostrararbol2(arbol);
+						cout<<""<<endl;
+						cout<<"--------IDENTIFICANDO UN NODO--------"<<endl;
+						cout<<endl<<"ingrese el valor del nodo a identificar: "; cin>>val;
+						bandera=0;
+						lista lista5;
+						lista5.identificar(val,arbol);
+						if(bandera != 1){
+							cout<<endl<<"=============== NODO NO ENCONTRADO ==========================="<<endl;	
+						}			
 						system("pause");
 						break;
-				case 4:
+						
+				case 5:
+						system("cls");
+						cout<<"-------CARACTERISTICAS DE UN NODO-------------"<<endl<<endl;
+						cout<<"ingrese el valor del nodo: "; cin>>val;
+						cont=0;
+						bandera=0;
+						lista lista6;
+						lista6.caracteristicas(val,arbol);
+						if(bandera != 1){
+							cout<<endl<<"=============== NODO NO ENCONTRADO ==========================="<<endl;	
+						}
+						system("pause");
+						break;			
+								
+						
+				case 3:
 						system("cls");
 						cout<<"-------BUSAR UN NODO POR SU VALOR--------------------"<<endl<<endl;
 						int valor_buscado=0;
 						cout<<"ingrese el valor buscado: "; cin>>valor_buscado;
+						bandera=0;
 						lista Lista3;
-						Lista3.buscar(valor_buscado,arbol);
-						if(encontrado==false){
-							cout<<endl<<"=============== NODO NO ENCONTRADO ==========================="<<endl;
+					 	Lista3.buscar(valor_buscado,arbol);
+					 	if(bandera != 1){
+							cout<<endl<<"=============== NODO NO ENCONTRADO ==========================="<<endl;	
 						}
 						system("pause");
 						break;
+				
+				
 			}	
-	}while(opcion != 5);
+	}while(opcion != 6);
+	}
+
+	
+//funcion para describir las caracteristicas de un nodo
+int lista::caracteristicas(int n,nodo *arbol){
+	if(arbol == NULL){
+		return 0;
+	}else{
+		if(arbol->valor == n){
+			//muestra el camino y la longitud de camino
+			if(arbol==raiz){
+				cout<<"ERROR. no se puede describir al nodo raiz"<<endl;
+				bandera=1;
+				return 0;
+			}else{
+				cout<<"EL ORDEN DEL NODO INGRESADO ES : 2" <<endl;
+				//buscamos el orden
+				if(arbol->izquierda != NULL && arbol->derecha != NULL){
+					cout<<"EL GRADO DEL NODO INGRESADO ES : 2" <<endl;
+				}else if(arbol->izquierda== NULL && arbol->derecha != NULL){
+					cout<<"EL GRADO DEL NODO INGRESADO ES : 1" <<endl;
+				}else if(arbol->izquierda != NULL && arbol->derecha ==NULL){
+					cout<<"EL GRADO DEL NODO INGRESADO ES : 1" <<endl;
+				}else if(arbol->izquierda == NULL & arbol->derecha == NULL){
+					cout<<"EL GRADO DEL NODO INGRESADO ES : 0" <<endl;
+				}
+				//buscamos el camino y la longitud 
+				cout<<"para llegar al nodo especificado debe visitar los siguientes nodos: "<<endl;
+				while(arbol!=NULL)	{
+					 arbol=arbol->padre;
+						cont++;
+						cout<<arbol->valor<<endl;
+						if(arbol->padre==NULL){
+							cout<<"LA LONGITUD DEL CAMINO ES: "<<cont<<endl;
+							cout<<"EL NIVEL DEL NODO INGRESADO ES : " <<cont+1<<endl;
+							cout<<"LA ALTURA DEL NODO INGRESADO ES : " <<cont+1<<endl;
+							bandera=1;
+							return 0;
+						}
+				}//fin del while
+				
+				//ahora buscamos la altura del nodo ingresado
+						
+			}//fin del else de igual a raiz
+			
+		}else{
+			
+			 	 caracteristicas(n,arbol->izquierda);
+			 	 caracteristicas(n,arbol->derecha);	
+			 	
+			 
+		}
+	}//fin del if
 }
+
+
+//funcion para identificar un nodo
+int lista::identificar( int valor2,nodo *arbol){
+	if(arbol == NULL){
+		return 0;
+	}else{
+		if(arbol->valor == valor2){
+			if(arbol->padre == NULL){
+				cout<<"EL NODO INGRESADO ES NODO RAIZ"<<endl;
+			}else{
+				if(arbol->padre->izquierda == arbol){ //si es hijo izquierdo
+					cout<<"EL NODO INGRESADO ES HIJO IZQUIERDO DEL NODO CON VALOR "<<arbol->padre->valor<<endl;
+					if(arbol->padre->derecha != NULL){
+						cout<<"EL NODO INGRESADO ES HERMANO DEL NODO CON VALOR "<<arbol->padre->derecha->valor<<endl;
+					}
+				}else if( arbol->padre->derecha == arbol){//si es hijo derecho
+					cout<<"EL NODO INGRESADO ES HIJO DERECHO DEL NODO CON VALOR "<<arbol->padre->valor<<endl;	
+					if(arbol->padre->izquierda != NULL){
+						cout<<"EL NODO INGRESADO ES HERMANO DEL NODO CON VALOR "<<arbol->padre->izquierda->valor<<endl;
+					}
+				}
+			}
+			if(arbol->izquierda != NULL || arbol->derecha !=NULL){
+				cout<<"EL NODO INGRESADO ES NODO PADRE"<<endl;
+			}
+			if(arbol->izquierda == NULL && arbol->derecha == NULL){
+				cout<<"EL NODO INGRESADO ES NODO HOJA "<<endl;
+			}else{
+				if(arbol != raiz){
+					cout<<"EL NODO INGRESADO ES NODO RAMA"<<endl;
+				}
+				
+			}
+			bandera=1;
+			return 0;
+		}else{
+			identificar(valor2,arbol->izquierda);
+			identificar(valor2,arbol->derecha);
+		}
+	}
+}//fin de la funcion identificar
+
+
 
 //funcion para crear nodos nuevos
 nodo *crearnodo(int n,nodo *padre){
