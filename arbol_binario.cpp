@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <windows.h>
 using namespace std;
+int bandera=0;
 
 class nodo {
 	//dESDE OTRA CLASE SE PUEDEN acceder a estos atributos
@@ -100,10 +101,11 @@ void menu(){
 						cout<<"-------BUSAR UN NODO POR SU VALOR--------------------"<<endl<<endl;
 						int valor_buscado=0;
 						cout<<"ingrese el valor buscado: "; cin>>valor_buscado;
+						bandera=0;
 						lista Lista3;
 						Lista3.buscar(valor_buscado,arbol);
-						if(encontrado==false){
-							cout<<endl<<"=============== NODO NO ENCONTRADO ==========================="<<endl;
+					 	if(bandera != 1){
+							cout<<endl<<"=============== NODO NO ENCONTRADO ==========================="<<endl;	
 						}
 						system("pause");
 						break;
