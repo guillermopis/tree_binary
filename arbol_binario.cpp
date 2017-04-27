@@ -81,9 +81,9 @@ void menu(){
 		cout<<"4. Eliminar nodo por su valor"<<endl;
 		cout<<"5. Identificar nodo"<<endl;
 		cout<<"6. Caracteristicas de un nodo"<<endl;
-		cout<<"7. Recorrido en Pre-Orden"<<endl;		
-		cout<<"8. Recorrido en In-Orden"<<endl;		
-		cout<<"9. Recorrido en Post-Orden"<<endl;
+		cout<<"7. Recorrido en Pre_orden"<<endl;		
+		cout<<"8. Recorrido en In_orden"<<endl;		
+		cout<<"9. Recorrido en Pos_orden"<<endl;
 		cout<<"0. salir"<<endl<<endl;
 		cout<<"ingrese una opcion: ";
 		cin>>opcion;
@@ -163,7 +163,7 @@ void menu(){
 				break;
 				case 9:
 											system("cls");
-						cout<<"-----------POST-ORDEN-----------"<<endl;
+						cout<<"-----------POS-ORDEN-----------"<<endl;
 						lista Lista7;
 						Lista7.postOrden(arbol);
 						cout<<"\n\n";
@@ -203,7 +203,7 @@ void lista::preorden(nodo *arbol){
 //Funcion para recorrido en profundidad  - InOrden
 
 
-//Funcion para recorrido en profundidad - PostOrden
+//Funcion para recorrido en profundidad - PosOrden
 
 
 //funcion para describir las caracteristicas de un nodo
