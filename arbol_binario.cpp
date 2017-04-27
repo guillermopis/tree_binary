@@ -51,7 +51,9 @@ class lista {
    	int aniadir(nodo *);
    	int identificar(int,nodo *);
    	int caracteristicas(int, nodo*);
-   	
+   	void preorden(nodo *);
+	void inorden(nodo *);
+	void postorden(nodo *);
    private:
     pnodo primero;
     pnodo actual;
@@ -79,7 +81,10 @@ void menu(){
 		cout<<"4. Eliminar nodo por su valor"<<endl;
 		cout<<"5. Identificar nodo"<<endl;
 		cout<<"6. Caracteristicas de un nodo"<<endl;
-		cout<<"7. salir"<<endl<<endl;
+		cout<<"7. Recorrido en Pre-Orden"<<endl;		
+		cout<<"8. Recorrido en In-Orden"<<endl;		
+		cout<<"9. Recorrido en Post-Orden"<<endl;
+		cout<<"0. salir"<<endl<<endl;
 		cout<<"ingrese una opcion: ";
 		cin>>opcion;
 			switch(opcion){
@@ -139,7 +144,31 @@ void menu(){
 							cout<<endl<<"=============== NODO NO ENCONTRADO ==========================="<<endl;	
 						}
 						system("pause");
-						break;			
+						break;
+				case 7:
+						system("cls");
+						cout<<"-----------PRE-ORDEN-----------"<<endl;
+						lista Lista5;
+						Lista5.preOrden(arbol);
+						cout<<"\n\n";
+						system("pause");
+				break;
+				case 8:
+						system("cls");
+						cout<<"-----------IN-ORDEN-----------"<<endl;
+						lista Lista6;
+						Lista6.inOrden(arbol);
+						cout<<"\n\n";
+						system("pause");
+				break;
+				case 9:
+											system("cls");
+						cout<<"-----------POST-ORDEN-----------"<<endl;
+						lista Lista7;
+						Lista7.postOrden(arbol);
+						cout<<"\n\n";
+						system("pause");
+				break;				
 						
 				case 3:
 						system("cls");
@@ -157,13 +186,118 @@ void menu(){
 				
 				
 			}	
-	}while(opcion != 7);
+	}while(opcion != 0);
+}
+//funcion para recorrido de profundidad PRE-ORDEN
+void lista::preorden(nodo *arbol){
+	if(arbol == NULL){ //Si el arbol esta vacio
+		return;
+	}
+	else{
+		cout<<arbol->valor<<" - ";
+		preorden(arbol->izquierda);
+		preorden(arbol->derecha);	
+	}	
 }
 
-//funcion para describir las caracteristicas de un nodo
+//Funcion para recorrido en profundidad  - InOrden
 
+
+//Funcion para recorrido en profundidad - PostOrden
+
+
+//funcion para describir las caracteristicas de un nodo
+int lista::caracteristicas(int n,nodo *arbol){
+	if(arbol== NULL){
+		return 0;
+	}else{
+		if(arbol->valor == n){
+			//muestra el camino y la longitud de camino
+			if(arbol==raiz){
+				cout<<"ERROR. no se puede describir al nodo raiz"<<endl;
+				bandera=1;
+				return 0;
+			}else{
+				cout<<"EL ORDEN DEL NODO INGRESADO ES : 2" <<endl;
+				//buscamos el orden
+				if(arbol->izquierda != NULL && arbol->derecha != NULL){
+					cout<<"EL GRADO DEL NODO INGRESADO ES : 2" <<endl;
+				}else if(arbol->izquierda== NULL && arbol->derecha != NULL){
+					cout<<"EL GRADO DEL NODO INGRESADO ES : 1" <<endl;
+				}else if(arbol->izquierda != NULL && arbol->derecha ==NULL){
+					cout<<"EL GRADO DEL NODO INGRESADO ES : 1" <<endl;
+				}else if(arbol->izquierda == NULL & arbol->derecha == NULL){
+					cout<<"EL GRADO DEL NODO INGRESADO ES : 0" <<endl;
+				}
+				//buscamos el camino y la longitud 
+				cout<<"para llegar al nodo especificado debe visitar los siguientes nodos: "<<endl;
+				while(arbol!=NULL)	{
+					 arbol=arbol->padre;
+						cont++;
+						cout<<arbol->valor<<endl;
+						if(arbol->padre==NULL){
+							cout<<"LA LONGITUD DEL CAMINO ES: "<<cont<<endl;
+							cout<<"EL NIVEL DEL NODO INGRESADO ES : " <<cont+1<<endl;
+							cout<<"LA ALTURA DEL NODO INGRESADO ES : " <<cont+1<<endl;
+							bandera=1;
+							return 0;
+						}
+				}//fin del while
+				
+				//ahora buscamos la altura del nodo ingresado
+						
+			}//fin del else de igual a raiz
+			
+		}else{
+			
+			 	 caracteristicas(n,arbol->izquierda);
+			 	 caracteristicas(n,arbol->derecha);	
+			 	
+			 
+		}
+	}//fin del if
+}
 
 //funcion para identificar un nodo
+int lista::identificar( int valor2,nodo *arbol){
+	if(arbol == NULL){
+		return 0;
+	}else{
+		if(arbol->valor == valor2){
+			if(arbol->padre == NULL){
+				cout<<"EL NODO INGRESADO ES NODO RAIZ"<<endl;
+			}else{
+				if(arbol->padre->izquierda == arbol){ //si es hijo izquierdo
+					cout<<"EL NODO INGRESADO ES HIJO IZQUIERDO DEL NODO CON VALOR "<<arbol->padre->valor<<endl;
+					if(arbol->padre->derecha != NULL){
+						cout<<"EL NODO INGRESADO ES HERMANO DEL NODO CON VALOR "<<arbol->padre->derecha->valor<<endl;
+					}
+				}else if( arbol->padre->derecha == arbol){//si es hijo derecho
+					cout<<"EL NODO INGRESADO ES HIJO DERECHO DEL NODO CON VALOR "<<arbol->padre->valor<<endl;	
+					if(arbol->padre->izquierda != NULL){
+						cout<<"EL NODO INGRESADO ES HERMANO DEL NODO CON VALOR "<<arbol->padre->izquierda->valor<<endl;
+					}
+				}
+			}
+			if(arbol->izquierda != NULL || arbol->derecha !=NULL){
+				cout<<"EL NODO INGRESADO ES NODO PADRE"<<endl;
+			}
+			if(arbol->izquierda == NULL && arbol->derecha == NULL){
+				cout<<"EL NODO INGRESADO ES NODO HOJA "<<endl;
+			}else{
+				if(arbol != raiz){
+					cout<<"EL NODO INGRESADO ES NODO RAMA"<<endl;
+				}
+				
+			}
+			bandera=1;
+			return 0;
+		}else{
+			identificar(valor2,arbol->izquierda);
+			identificar(valor2,arbol->derecha);
+		}
+	}
+}//fin de la funcion identificar
 
 
 //funcioni para eliminar un nodo y hacer que el subarbol derecho ocupe el lugar del nodo que se elimine.
