@@ -148,24 +148,24 @@ void menu(){
 				case 7:
 						system("cls");
 						cout<<"-----------PRE-ORDEN-----------"<<endl;
-						lista Lista5;
-						Lista5.preOrden(arbol);
+						lista Lista7;
+						Lista7.preorden(arbol);
 						cout<<"\n\n";
 						system("pause");
 				break;
 				case 8:
 						system("cls");
 						cout<<"-----------IN-ORDEN-----------"<<endl;
-						lista Lista6;
-						Lista6.inOrden(arbol);
+						lista Lista8;
+	//					Lista8.inorden(arbol);
 						cout<<"\n\n";
 						system("pause");
 				break;
 				case 9:
 											system("cls");
 						cout<<"-----------POS-ORDEN-----------"<<endl;
-						lista Lista7;
-						Lista7.postOrden(arbol);
+						lista Lista9;
+						Lista9.postorden(arbol);
 						cout<<"\n\n";
 						system("pause");
 				break;				
@@ -204,6 +204,16 @@ void lista::preorden(nodo *arbol){
 
 
 //Funcion para recorrido en profundidad - PosOrden
+void lista::postorden(nodo *arbol){
+	if(arbol == NULL){ //Si el arbol esta vacio
+		return;
+	}
+	else{
+		postorden(arbol->izquierda);
+		postorden(arbol->derecha);
+		cout<<arbol->valor<<" - ";
+	}
+}
 
 
 //funcion para describir las caracteristicas de un nodo
