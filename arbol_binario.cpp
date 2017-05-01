@@ -157,7 +157,7 @@ void menu(){
 						system("cls");
 						cout<<"-----------IN-ORDEN-----------"<<endl;
 						lista Lista8;
-	//					Lista8.inorden(arbol);
+						Lista8.inorden(arbol);
 						cout<<"\n\n";
 						system("pause");
 				break;
@@ -201,6 +201,16 @@ void lista::preorden(nodo *arbol){
 }
 
 //Funcion para recorrido en profundidad  - InOrden
+void lista::inorden(nodo *arbol){
+	if(arbol == NULL){
+		return;
+	}
+	else{
+		inorden(arbol->izquierda);
+		cout<<arbol->valor<<" - ";
+		inorden(arbol->derecha);
+	}
+}
 
 
 //Funcion para recorrido en profundidad - PosOrden
