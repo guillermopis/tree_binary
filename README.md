@@ -52,21 +52,18 @@ programa de arboles utilizando c++
 + **Then:** debe ingresar el valor del nodo a buscar, si se encuentra lo mostrara
 
 VERSION 4 (Recorrer el árbol en Pre-Orden, In-Orden y Post-Orden)
-
 FEATURE: Recorrido en Pre-Orden
 Escenario 1
-Given: un usuario inicia el programa
-When: selecciona la opción “Recorrido en Pre-Orden”
-Then: se visualizan todos los nodos del árbol con su respectivo Recorrido en Pre-Orden
-
-### FEATURE: Recorrido en In-Orden
+•	Given: un usuario inicia el programa
+•	When: selecciona la opción “Recorrido en Pre-Orden”
+•	Then: se visualizan todos los nodos del árbol con su respectivo Recorrido en Pre-Orden
+FEATURE: Recorrido en In-Orden
 Escenario 2
-Given: un usuario inicia el programa 
-When: selecciona la opción “Recorrido en In-Orden”
-Then: se visualizan todos los nodos del arbol con su respectivo Recorrido en In-Orden
-
+•	Given: un usuario inicia el programa 
+•	When: selecciona la opción “Recorrido en In-Orden”
+•	Then: se visualizan todos los nodos del arbol con su respectivo Recorrido en In-Orden
 FEATURE: Recorrido en Post-Orden
 Escenario 3
-Given: un usuario inicia el programa
-When: selecciona la opción “Recorrido en Post-Orden”
-Then: se visualizan todos los nodos del arbol con su respectivo Recorrido en Post-Orden
+•	Given: un usuario inicia el programa
+•	When: selecciona la opción “Recorrido en Post-Orden”
+•	Then: se visualizan todos los nodos del arbol con su respectivo Recorrido en Post-Orden
